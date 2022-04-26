@@ -18,7 +18,7 @@ class ProductCard extends React.Component {
 }
 
 ProductCard.propTypes = {
-  results: propTypes.func.isRequired,
+  results: propTypes.shape.isRequired,
 };
 
 export default ProductCard;
