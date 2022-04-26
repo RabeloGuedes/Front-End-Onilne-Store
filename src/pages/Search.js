@@ -1,15 +1,22 @@
 import React from 'react';
-import Categories from './Categories';
+import { Link } from 'react-router-dom';
+import Categories from '../components/Categories';
 
 class Search extends React.Component {
   render() {
     return (
-      <section>
+      <>
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
+        <Link
+          to="/cart"
+          data-testid="shopping-cart-button"
+        >
+          Carrinho de compras
+        </Link>
         <Categories />
-      </section>
+      </>
     );
   }
 }
