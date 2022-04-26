@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SearchByQuery from '../components/SearchByQuery';
 import Categories from '../components/Categories';
 
 class Search extends React.Component {
@@ -9,6 +10,7 @@ class Search extends React.Component {
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
+        <SearchByQuery />
         <Link
           to="/cart"
           data-testid="shopping-cart-button"
