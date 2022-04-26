@@ -1,15 +1,22 @@
 import React from 'react';
-import SearchByQuery from './SearchByQuery';
+import { Link } from 'react-router-dom';
+import SearchByQuery from '../components/SearchByQuery';
 
 class Search extends React.Component {
   render() {
     return (
-      <div>
+      <>
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
         <SearchByQuery />
-      </div>
+        <Link
+          to="/cart"
+          data-testid="shopping-cart-button"
+        >
+          Carrinho de compras
+        </Link>
+      </>
     );
   }
 }
