@@ -14,7 +14,6 @@ export default class Categories extends React.Component {
     this.setState({
       categories: response,
     });
-    console.log(response);
   }
 
   render() {

@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Search from './pages/Search';
 import Cart from './pages/Cart';
+import Item from './pages/Item';
 
 export default class App extends React.Component {
   render() {
@@ -11,6 +12,7 @@ export default class App extends React.Component {
         <Switch>
           <Route exact path="/" component={ Search } />
           <Route path="/cart" component={ Cart } />
+          <Route path="/item/:id" render={ (props) => <Item { ...props } /> } />
         </Switch>
       </BrowserRouter>
     );
