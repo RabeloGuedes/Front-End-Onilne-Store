@@ -1,11 +1,16 @@
 import React from 'react';
+import SearchByQuery from './SearchByQuery';
 
 class Search extends React.Component {
   render() {
     return (
-      <h3 data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </h3>);
+      <div>
+        <h3 data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h3>
+        <SearchByQuery />
+      </div>
+    );
   }
 }
 
