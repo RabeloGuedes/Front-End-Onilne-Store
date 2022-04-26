@@ -15,7 +15,7 @@ class Search extends React.Component {
           Carrinho de compras
         </Link>
       </>
-      );
+    );
   }
 }
 
