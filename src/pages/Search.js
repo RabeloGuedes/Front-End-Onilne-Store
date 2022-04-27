@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchByQuery from '../components/SearchByQuery';
-import Categories from '../components/Categories';
+import SearchByCategory from '../components/SearchByCategory';
 
 class Search extends React.Component {
   render() {
@@ -17,7 +17,7 @@ class Search extends React.Component {
         >
           Carrinho de compras
         </Link>
-        <Categories />
+        <SearchByCategory />
       </>
     );
   }

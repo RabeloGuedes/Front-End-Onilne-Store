@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 export default class Categories extends React.Component {
@@ -14,19 +15,22 @@ export default class Categories extends React.Component {
     this.setState({
       categories: response,
     });
-    console.log(response);
   }
 
   render() {
     const { categories } = this.state;
+    const { func } = this.props;
     return categories && (
       (
         <section>
           {categories.map((categorie) => (
             <button
               key={ categorie.id }
+              name={ categorie.id }
               data-testid="category"
               type="button"
+              className="category"
+              onClick={ func }
             >
               { categorie.name }
             </button>))}
@@ -34,3 +38,7 @@ export default class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = {
+  func: PropTypes.func.isRequired,
+};
