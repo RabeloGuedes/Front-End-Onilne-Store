@@ -1,6 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getProductsFromID } from '../services/api';
+import { addToCart } from '../services/cartFunc';
 
 export default class Item extends React.Component {
   constructor() {
@@ -21,13 +23,26 @@ export default class Item extends React.Component {
 
   render() {
     const { item } = this.state;
-    console.log(item);
     return item && (
       <div>
+        <Link
+          to="/cart"
+        >
+          <button data-testid="shopping-cart-button" type="button">
+            Carrinho de compras
+          </button>
+        </Link>
         <section>
           <p data-testid="product-detail-name">{item.title}</p>
           <img src={ item.pictures[0].url } alt={ item.title } />
         </section>
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          onClick={ () => addToCart(item.id) }
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
