@@ -27,6 +27,7 @@ export default class Item extends React.Component {
         <section>
           <p data-testid="product-detail-name">{item.title}</p>
           <img src={ item.pictures[0].url } alt={ item.title } />
+          <p>{item.id}</p>
         </section>
       </div>
     );
