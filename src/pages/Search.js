@@ -13,9 +13,10 @@ class Search extends React.Component {
         <SearchByQuery />
         <Link
           to="/cart"
-          data-testid="shopping-cart-button"
         >
-          Carrinho de compras
+          <button data-testid="shopping-cart-button" type="button">
+            Carrinho de compras
+          </button>
         </Link>
         <SearchByCategory />
       </>
