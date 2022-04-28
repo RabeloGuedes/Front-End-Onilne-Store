@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { getProductsFromID } from '../services/api';
+import Review from '../components/Review';
 
 export default class Item extends React.Component {
   constructor() {
@@ -28,6 +29,7 @@ export default class Item extends React.Component {
           <p data-testid="product-detail-name">{item.title}</p>
           <img src={ item.pictures[0].url } alt={ item.title } />
         </section>
+        <Review />
       </div>
     );
   }
