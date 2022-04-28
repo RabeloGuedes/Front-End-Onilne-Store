@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { showCartItems } from '../services/cartFunc';
+import { showCartItems, addToCart, removeToCart } from '../services/cartFunc';
 
 class CartItemsComponent extends React.Component {
   constructor() {
@@ -22,23 +22,31 @@ class CartItemsComponent extends React.Component {
   }
 
   decreaseQuant() {
-    const { quantity } = this.state;
     const { result } = this.props;
-    if (quantity <= 1) {
-      this.setState({
-        quantity: 1,
-      });
-    }
-    this.setState((prevState) => ({
-      quantity: prevState.quantity - 1,
-    }));
-    localStorage.setItem(result.id);
+    // this.setState(((prevState) => ({
+    //   quantity: prevState.quantity - 1,
+    // })), () => {
+
+    removeToCart(result.id);
+    const items = showCartItems();
+    const counter = items.filter((item) => item === result.id);
+    this.setState({ quantity: counter.length });
+    //   const { quantity } = this.state;
+    //   if (quantity <= 0) {
+    //     this.setState({
+    //       quantity: 0,
+    //     });
+    //   }
+    // });
   }
 
   increaseQuant() {
-    this.setState((prevState) => ({
+    const { result } = this.props;
+    this.setState(((prevState) => ({
       quantity: prevState.quantity + 1,
-    }));
+    })), () => {
+      addToCart(result.id);
+    });
   }
 
   render() {

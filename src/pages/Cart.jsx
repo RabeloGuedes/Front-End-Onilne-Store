@@ -34,7 +34,7 @@ export default class Cart extends Component {
           ? cartItems.map((item, index) => (
             <CartItemsComponent key={ index } result={ item } />))
           : emptyMessage}
-        {cartItems && <h3>{`TotalR$${cartItems.map((item) => item.price)}`}</h3>}
+        {cartItems && <h3>{`TotalR$${0}`}</h3>}
       </div>
     );
   }
