@@ -36,7 +36,7 @@ class CartItemsComponent extends React.Component {
     //     this.setState({
     //       quantity: 0,
     //     });
-    //   }
+    //   }d
     // });
   }
 
