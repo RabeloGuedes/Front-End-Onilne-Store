@@ -18,6 +18,35 @@ class CartItemsComponent extends React.Component {
     this.setState({ quantity: counter.length });
   }
 
+
+  decreaseQuant() {
+    const { result } = this.props;
+    // this.setState(((prevState) => ({
+    //   quantity: prevState.quantity - 1,
+    // })), () => {
+
+    removeToCart(result.id);
+    const items = showCartItems();
+    const counter = items.filter((item) => item === result.id);
+    this.setState({ quantity: counter.length });
+    //   const { quantity } = this.state;
+    //   if (quantity <= 0) {
+    //     this.setState({
+    //       quantity: 0,
+    //     });
+    //   }d
+    // });
+  }
+
+  increaseQuant() {
+    const { result } = this.props;
+    this.setState(((prevState) => ({
+      quantity: prevState.quantity + 1,
+    })), () => {
+      addToCart(result.id);
+    });
+  }
+
   render() {
     const { result } = this.props;
     const { quantity } = this.state;

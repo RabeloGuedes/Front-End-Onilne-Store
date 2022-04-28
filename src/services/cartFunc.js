@@ -11,3 +11,5 @@ export function showCartItems() {
   const items = JSON.parse(localStorage.getItem('cartItems'));
   return items;
 }
+
+// d
