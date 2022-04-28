@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { showCartItems, addToCart, removeToCart } from '../services/cartFunc';
+import { showCartItems } from '../services/cartFunc';
 
 class CartItemsComponent extends React.Component {
   constructor() {
@@ -9,9 +9,6 @@ class CartItemsComponent extends React.Component {
     this.state = {
       quantity: 0,
     };
-
-    this.decreaseQuant = this.decreaseQuant.bind(this);
-    this.increaseQuant = this.increaseQuant.bind(this);
   }
 
   componentDidMount() {
@@ -20,6 +17,7 @@ class CartItemsComponent extends React.Component {
     const counter = items.filter((item) => item === result.id);
     this.setState({ quantity: counter.length });
   }
+
 
   decreaseQuant() {
     const { result } = this.props;
@@ -56,32 +54,8 @@ class CartItemsComponent extends React.Component {
       <div key={ result.id }>
         <img src={ result.thumbnail } alt={ result.title } />
         <p data-testid="shopping-cart-product-name">{result.title}</p>
-        <p>
-          R$
-          {' '}
-          {result.price}
-        </p>
+        <p>{result.price}</p>
         <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
-        <button
-          type="button"
-          data-testid="product-decrease-quantity"
-          onClick={ this.decreaseQuant }
-        >
-          -
-        </button>
-        <button
-          type="button"
-          data-testid="product-increase-quantity"
-          onClick={ this.increaseQuant }
-        >
-          +
-        </button>
-        <button
-          type="button"
-        >
-          X
-        </button>
-        {`TotalR$${result.price * quantity}`}
       </div>
     );
   }
