@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromID } from '../services/api';
+import Review from '../components/Review';
 import { addToCart } from '../services/cartFunc';
 
 export default class Item extends React.Component {
@@ -43,6 +44,7 @@ export default class Item extends React.Component {
         >
           Adicionar ao Carrinho
         </button>
+        <Review />
       </div>
     );
   }
