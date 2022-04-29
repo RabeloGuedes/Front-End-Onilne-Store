@@ -40,7 +40,7 @@ export default class Item extends React.Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ () => addToCart(item.id) }
+          onClick={ () => addToCart(item) }
         >
           Adicionar ao Carrinho
         </button>
@@ -53,3 +53,5 @@ export default class Item extends React.Component {
 Item.propTypes = {
   match: propTypes.string.isRequired,
 };
+
+// agora vai

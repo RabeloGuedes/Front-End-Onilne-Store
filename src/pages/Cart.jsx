@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { showCartItems } from '../services/cartFunc';
-import { getProductsFromID } from '../services/api';
 import CartItemsComponent from '../components/CartItemsComponent';
 
 export default class Cart extends Component {
@@ -14,11 +13,7 @@ export default class Cart extends Component {
 
   async componentDidMount() {
     const items = showCartItems();
-    if (items) {
-      const result = items.filter((item, index) => items.indexOf(item) === index);
-      const teste = await Promise.all(result.map((item) => getProductsFromID(item)));
-      this.setState({ cartItems: teste });
-    }
+    this.setState({ cartItems: items });
   }
 
   render() {
@@ -39,4 +34,4 @@ export default class Cart extends Component {
   }
 }
 
-// d
+// agora vai
