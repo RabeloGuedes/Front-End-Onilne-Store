@@ -18,7 +18,6 @@ class CartItemsComponent extends React.Component {
     this.setState({ quantity: counter.length });
   }
 
-
   decreaseQuant() {
     const { result } = this.props;
     // this.setState(((prevState) => ({
