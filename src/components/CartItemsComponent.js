@@ -54,9 +54,13 @@ class CartItemsComponent extends React.Component {
     const { quantity, PlusbuttonOff, MinusButtonOff } = this.state;
     return quantity > 0 && (
       <div key={ result.id }>
-        <img src={ result.thumbnail } alt={ result.title } />
         <p data-testid="shopping-cart-product-name">{result.title}</p>
+        <img src={ result.thumbnail } alt={ result.title } />
         <p>{`R$ ${result.price}`}</p>
+        <div>
+          {result.shipping.free_shipping
+            && <span data-testid="free-shipping">Frete Grátis</span>}
+        </div>
         <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
         <button
           data-testid="product-decrease-quantity"
