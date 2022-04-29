@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { removeItem } from '../services/cartFunc';
 
 class CartItemsComponent extends React.Component {
   constructor() {
@@ -94,5 +95,3 @@ CartItemsComponent.propTypes = {
 };
 
 export default CartItemsComponent;
-
-// agora vai mesmo
