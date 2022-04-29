@@ -6,6 +6,8 @@ class CartItemsComponent extends React.Component {
     super();
     this.state = {
       quantity: 0,
+      PlusbuttonOff: false,
+      MinusButtonOff: true,
     };
 
     this.decreaseQuant = this.decreaseQuant.bind(this);
@@ -20,18 +22,36 @@ class CartItemsComponent extends React.Component {
   decreaseQuant() {
     const { result } = this.props;
     result.quantity -= 1;
-    this.setState({ quantity: result.quantity });
+    if (result.quantity === 1) {
+      this.setState({
+        MinusButtonOff: true,
+      });
+    }
+    this.setState({
+      quantity: result.quantity,
+      PlusbuttonOff: false,
+    });
   }
 
   increaseQuant() {
     const { result } = this.props;
     result.quantity += 1;
-    this.setState({ quantity: result.quantity });
+    if (result.available_quantity > result.quantity) {
+      this.setState({
+        quantity: result.quantity,
+        MinusButtonOff: false,
+      });
+    } else if (result.available_quantity === result.quantity) {
+      this.setState({
+        quantity: result.quantity,
+        PlusbuttonOff: true,
+      });
+    }
   }
 
   render() {
     const { result } = this.props;
-    const { quantity } = this.state;
+    const { quantity, PlusbuttonOff, MinusButtonOff } = this.state;
     return quantity > 0 && (
       <div key={ result.id }>
         <img src={ result.thumbnail } alt={ result.title } />
@@ -42,6 +62,7 @@ class CartItemsComponent extends React.Component {
           data-testid="product-decrease-quantity"
           type="button"
           onClick={ this.decreaseQuant }
+          disabled={ MinusButtonOff }
         >
           -
         </button>
@@ -49,6 +70,7 @@ class CartItemsComponent extends React.Component {
           data-testid="product-increase-quantity"
           type="button"
           onClick={ this.increaseQuant }
+          disabled={ PlusbuttonOff }
         >
           +
         </button>
