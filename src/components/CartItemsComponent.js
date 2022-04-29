@@ -91,4 +91,4 @@ CartItemsComponent.propTypes = {
 
 export default CartItemsComponent;
 
-// agora vai
+// agora vai mesmo
