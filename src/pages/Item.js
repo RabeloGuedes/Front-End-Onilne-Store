@@ -53,5 +53,3 @@ export default class Item extends React.Component {
 Item.propTypes = {
   match: propTypes.string.isRequired,
 };
-
-// agora vai

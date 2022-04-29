@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { removeItem } from '../services/cartFunc';
 
 class CartItemsComponent extends React.Component {
   constructor() {
@@ -22,6 +23,9 @@ class CartItemsComponent extends React.Component {
   decreaseQuant() {
     const { result } = this.props;
     result.quantity -= 1;
+    if (result.quantity === 0) {
+      removeItem(result);
+    }
     if (result.quantity === 1) {
       this.setState({
         MinusButtonOff: true,
@@ -31,6 +35,7 @@ class CartItemsComponent extends React.Component {
       quantity: result.quantity,
       PlusbuttonOff: false,
     });
+    this.setState({ quantity: result.quantity });
   }
 
   increaseQuant() {
