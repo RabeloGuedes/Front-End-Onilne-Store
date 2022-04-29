@@ -11,6 +11,10 @@ export default class Review extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getAvaliations();
+  }
+
   handleEmailChange({ target: { value } }) {
     this.setState({ currentEmail: value });
   }
@@ -24,7 +28,7 @@ export default class Review extends Component {
   }
 
   getAvaliations() {
-    const avaliations = localStorage.getItem('avaliations');
+    const avaliations = JSON.parse(localStorage.getItem('avaliations'));
     this.setState({ avaliations });
   }
 
@@ -41,9 +45,12 @@ export default class Review extends Component {
     };
     reviews.push(avaliation);
     localStorage.setItem('avaliations', JSON.stringify(reviews));
-    const { avaliations } = this.state;
-    console.log(avaliations);
     this.getAvaliations();
+    this.setState({
+      currentRating: 0,
+      currentReview: '',
+      currentEmail: '',
+    });
   }
 
   render() {
