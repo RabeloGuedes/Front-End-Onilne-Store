@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Search from './pages/Search';
 import Cart from './pages/Cart';
 import Item from './pages/Item';
+import Checkout from './pages/Checkout';
 
 export default class App extends React.Component {
   render() {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={ Search } />
           <Route path="/cart" component={ Cart } />
           <Route path="/item/:id" render={ (props) => <Item { ...props } /> } />
+          <Route path="/checkout" component={ Checkout } />
         </Switch>
       </BrowserRouter>
     );
