@@ -23,7 +23,12 @@ class CartItemsComponent extends React.Component {
   decreaseQuant() {
     const { result } = this.props;
     result.quantity -= 1;
-    if (result.quantity === 0) {
+    this.setState({ quantity: result.quantity });
+    if (result.quantity !== 0) {
+      const items = JSON.parse(localStorage.getItem('cartItems'));
+      items.find((i) => i.id === result.id).quantity -= 1;
+      localStorage.setItem('cartItems', JSON.stringify(items));
+    } else {
       removeItem(result);
     }
     if (result.quantity === 1) {
@@ -41,6 +46,10 @@ class CartItemsComponent extends React.Component {
   increaseQuant() {
     const { result } = this.props;
     result.quantity += 1;
+    this.setState({ quantity: result.quantity });
+    const items = JSON.parse(localStorage.getItem('cartItems'));
+    items.find((i) => i.id === result.id).quantity += 1;
+    localStorage.setItem('cartItems', JSON.stringify(items));
     if (result.available_quantity > result.quantity) {
       this.setState({
         quantity: result.quantity,
