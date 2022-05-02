@@ -32,23 +32,40 @@ export default class Checkout extends React.Component {
   }
 
   handleRadioChange({ target }) {
-    this.setState({ [target.name]: true });
+    this.setState(() => ({
+      pix: false,
+      boleto: false,
+      debito: false,
+      credito: false,
+      [target.value]: true,
+    }), () => this.inputCheck());
   }
 
   inputCheck() {
-    const { name, email, cpf, phone, cep, adress } = this.state;
-    if (name.length === 0
-      || email.length === 0 || !email.includes('@')
-      || cpf.length === 0
-      || phone.length === 0
-      || cep.length === 0
-      || adress.length === 0) {
-      this.setState({
-        buttonOff: true,
-      });
+    const { name,
+      email,
+      cpf,
+      phone,
+      cep,
+      adress,
+      pix,
+      boleto,
+      credito,
+      debito } = this.state;
+    if (name.length > 0
+      && email.length > 0 && email.includes('@')
+      && cpf.length > 0
+      && phone.length > 0
+      && cep.length > 0
+      && adress.length > 0) {
+      if (pix || boleto || credito || debito) {
+        this.setState({
+          buttonOff: false,
+        });
+      }
     } else {
       this.setState({
-        buttonOff: false,
+        buttonOff: true,
       });
     }
   }
@@ -77,6 +94,10 @@ export default class Checkout extends React.Component {
               <p>{`Quantidade: ${product.quantity}`}</p>
               <h4>{`Subtotal R$${product.quantity * product.price}`}</h4>
             </div>))}
+          <h3>
+            {`Total: R$${products
+              .reduce((acc, curr) => acc + (curr.quantity * curr.price), 0)}`}
+          </h3>
         </div>
         <forms action="">
           <div>
@@ -162,7 +183,7 @@ export default class Checkout extends React.Component {
             Pix
             <input
               type="radio"
-              value="Pix"
+              value="pix"
               name="pay"
               onClick={ this.handleRadioChange }
               checked={ pix }
@@ -173,7 +194,7 @@ export default class Checkout extends React.Component {
             <input
               type="radio"
               value="boleto"
-              name="boleto"
+              name="pay"
               onClick={ this.handleRadioChange }
               checked={ boleto }
             />
