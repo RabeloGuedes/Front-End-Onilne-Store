@@ -29,6 +29,10 @@ class ProductCard extends React.Component {
               <p>{result.price}</p>
             </div>
           </Link>
+          <div>
+            {result.shipping.free_shipping
+                && <span data-testid="free-shipping">Frete Grátis</span>}
+          </div>
           <button
             data-testid="product-add-to-cart"
             type="button"

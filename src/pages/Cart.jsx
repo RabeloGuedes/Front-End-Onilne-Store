@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { showCartItems } from '../services/cartFunc';
 import CartItemsComponent from '../components/CartItemsComponent';
 
@@ -29,6 +30,7 @@ export default class Cart extends Component {
           ? cartItems.map((item, index) => (
             <CartItemsComponent key={ index } result={ item } />))
           : emptyMessage}
+        <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
       </div>
     );
   }
