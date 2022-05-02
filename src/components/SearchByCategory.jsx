@@ -35,3 +35,5 @@ export default class SearchByCategory extends Component {
     );
   }
 }
+
+//

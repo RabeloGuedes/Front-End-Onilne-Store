@@ -5,7 +5,6 @@ export function addToCart(element) {
     items = JSON.parse(localStorage.getItem('cartItems'));
     if (items.some((i) => i.id === element.id)) {
       items.find((i) => i.id === element.id).quantity += 1;
-      console.log(items);
     } else {
       items.push(element);
     }
@@ -26,3 +25,5 @@ export function showCartItems() {
   const items = JSON.parse(localStorage.getItem('cartItems'));
   return items;
 }
+
+//

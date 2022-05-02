@@ -1,9 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { getProductsFromID } from '../services/api';
 import Review from '../components/Review';
-import { addToCart } from '../services/cartFunc';
+import { addToCart, showCartItems } from '../services/cartFunc';
+import CartButton from '../components/CartButton';
 
 export default class Item extends React.Component {
   constructor() {
@@ -11,6 +11,7 @@ export default class Item extends React.Component {
 
     this.state = {
       item: '',
+      quantity: 0,
     };
   }
 
@@ -20,19 +21,23 @@ export default class Item extends React.Component {
     const data = await getProductsFromID(id)
       .then((product) => product);
     this.setState({ item: data });
+    this.countQuantity();
+  }
+
+  countQuantity() {
+    const items = showCartItems();
+    if (items.length > 0) {
+      const quantity = items.map((i) => i.quantity);
+      const total = quantity.reduce((acc, curr) => acc + curr);
+      this.setState({ quantity: total });
+    }
   }
 
   render() {
-    const { item } = this.state;
+    const { item, quantity } = this.state;
     return item && (
       <div>
-        <Link
-          to="/cart"
-        >
-          <button data-testid="shopping-cart-button" type="button">
-            Carrinho de compras
-          </button>
-        </Link>
+        <CartButton quantity={ quantity } />
         <section>
           <p data-testid="product-detail-name">{item.title}</p>
           <img src={ item.pictures[0].url } alt={ item.title } />
@@ -40,7 +45,7 @@ export default class Item extends React.Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ () => addToCart(item) }
+          onClick={ () => { addToCart(item); this.countQuantity(); } }
         >
           Adicionar ao Carrinho
         </button>
@@ -53,3 +58,5 @@ export default class Item extends React.Component {
 Item.propTypes = {
   match: propTypes.string.isRequired,
 };
+
+//

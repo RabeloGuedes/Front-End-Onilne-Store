@@ -21,16 +21,23 @@ class CartItemsComponent extends React.Component {
   decreaseQuant() {
     const { result } = this.props;
     result.quantity -= 1;
-    if (result.quantity === 0) {
+    this.setState({ quantity: result.quantity });
+    if (result.quantity !== 0) {
+      const items = JSON.parse(localStorage.getItem('cartItems'));
+      items.find((i) => i.id === result.id).quantity -= 1;
+      localStorage.setItem('cartItems', JSON.stringify(items));
+    } else {
       removeItem(result);
     }
-    this.setState({ quantity: result.quantity });
   }
 
   increaseQuant() {
     const { result } = this.props;
     result.quantity += 1;
     this.setState({ quantity: result.quantity });
+    const items = JSON.parse(localStorage.getItem('cartItems'));
+    items.find((i) => i.id === result.id).quantity += 1;
+    localStorage.setItem('cartItems', JSON.stringify(items));
   }
 
   render() {
@@ -72,3 +79,5 @@ CartItemsComponent.propTypes = {
 };
 
 export default CartItemsComponent;
+
+//

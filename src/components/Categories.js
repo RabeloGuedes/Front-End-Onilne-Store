@@ -42,3 +42,5 @@ export default class Categories extends React.Component {
 Categories.propTypes = {
   func: PropTypes.func.isRequired,
 };
+
+//
