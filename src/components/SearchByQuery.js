@@ -1,8 +1,9 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import ProductCard from './ProductCard';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
-class SearchByQuery extends React.Component {
+export default class SearchByQuery extends React.Component {
   constructor() {
     super();
 
@@ -29,6 +30,7 @@ class SearchByQuery extends React.Component {
 
   render() {
     const { queryParam, searchResult } = this.state;
+    const { func } = this.props;
 
     return (
       <div>
@@ -47,12 +49,12 @@ class SearchByQuery extends React.Component {
             Pesquisar
           </button>
         </section>
-        {searchResult && <ProductCard results={ searchResult } />}
+        {searchResult && <ProductCard results={ searchResult } func={ func } />}
       </div>
     );
   }
 }
 
-export default SearchByQuery;
-
-//
+SearchByQuery.propTypes = {
+  func: propTypes.func.isRequired,
+};

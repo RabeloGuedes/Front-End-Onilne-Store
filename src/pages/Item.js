@@ -15,41 +15,48 @@ export default class Item extends React.Component {
     };
   }
 
-  async componentDidMount() {
-    const { match } = this.props;
-    const { id } = match.params;
-    const data = await getProductsFromID(id)
-      .then((product) => product);
-    this.setState({ item: data });
-    this.countQuantity();
+  componentDidMount() {
+    this.setState((() => {
+      this.countQuantity();
+    }), async () => {
+      const { match } = this.props;
+      const { id } = match.params;
+      const data = await getProductsFromID(id)
+        .then((product) => product);
+      this.setState({ item: data });
+    });
   }
 
   countQuantity() {
     const items = showCartItems();
-    if (items.length > 0) {
+    if (items && items.length > 0) {
       const quantity = items.map((i) => i.quantity);
       const total = quantity.reduce((acc, curr) => acc + curr);
-      this.setState({ quantity: total });
+      localStorage.setItem('quantity', total);
     }
+    this.setState({ quantity: JSON.parse(localStorage.getItem('quantity')) });
   }
 
   render() {
     const { item, quantity } = this.state;
-    return item && (
+    return (
       <div>
         <CartButton quantity={ quantity } />
-        <section>
-          <p data-testid="product-detail-name">{item.title}</p>
-          <img src={ item.pictures[0].url } alt={ item.title } />
-        </section>
-        <button
-          data-testid="product-detail-add-to-cart"
-          type="button"
-          onClick={ () => { addToCart(item); this.countQuantity(); } }
-        >
-          Adicionar ao Carrinho
-        </button>
-        <Review />
+        {item && (
+          <div>
+            <section>
+              <p data-testid="product-detail-name">{item.title}</p>
+              <img src={ item.pictures[0].url } alt={ item.title } />
+            </section>
+            <button
+              data-testid="product-detail-add-to-cart"
+              type="button"
+              onClick={ () => { addToCart(item); this.countQuantity(); } }
+            >
+              Adicionar ao Carrinho
+            </button>
+            <Review />
+          </div>)}
       </div>
     );
   }
@@ -58,5 +65,3 @@ export default class Item extends React.Component {
 Item.propTypes = {
   match: propTypes.string.isRequired,
 };
-
-//

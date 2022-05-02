@@ -79,5 +79,3 @@ CartItemsComponent.propTypes = {
 };
 
 export default CartItemsComponent;
-
-//

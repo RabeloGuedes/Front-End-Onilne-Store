@@ -3,36 +3,22 @@ import SearchByQuery from '../components/SearchByQuery';
 import SearchByCategory from '../components/SearchByCategory';
 import CartButton from '../components/CartButton';
 
-class Search extends React.Component {
+export default class Search extends React.Component {
   constructor() {
     super();
 
+    this.countQuantity = this.countQuantity.bind(this);
     this.state = {
       quantity: 0,
     };
   }
 
   componentDidMount() {
-    this.showQuantity();
+    this.countQuantity();
   }
 
-  shouldComponentUpdate(_nextProps, nextState) {
-    console.log(nextState.quantity);
-    const { quantity } = this.state;
-    const teste = JSON.parse(localStorage.getItem('quantity'));
-    if (quantity !== teste) {
-      console.log('mudou');
-      return true;
-    }
-  }
-
-  componentDidUpdate() {
-    this.showQuantity();
-  }
-
-  showQuantity() {
-    const teste = JSON.parse(localStorage.getItem('quantity'));
-    this.setState({ quantity: teste });
+  countQuantity() {
+    this.setState({ quantity: JSON.parse(localStorage.getItem('quantity')) });
   }
 
   render() {
@@ -42,14 +28,10 @@ class Search extends React.Component {
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
-        <SearchByQuery />
+        <SearchByQuery func={ this.countQuantity } />
         <CartButton quantity={ quantity } />
-        <SearchByCategory />
+        <SearchByCategory func={ this.countQuantity } />
       </>
     );
   }
 }
-
-export default Search;
-
-//

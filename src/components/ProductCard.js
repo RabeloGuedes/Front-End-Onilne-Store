@@ -14,7 +14,7 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { results } = this.props;
+    const { results, func } = this.props;
 
     return (
       results && results.map((result) => (
@@ -32,7 +32,7 @@ class ProductCard extends React.Component {
           <button
             data-testid="product-add-to-cart"
             type="button"
-            onClick={ () => { addToCart(result); this.countQuantity(); } }
+            onClick={ () => { addToCart(result); this.countQuantity(); func(); } }
           >
             Adicionar ao Carrinho
           </button>
@@ -44,8 +44,7 @@ class ProductCard extends React.Component {
 
 ProductCard.propTypes = {
   results: propTypes.shape.isRequired,
+  func: propTypes.func.isRequired,
 };
 
 export default ProductCard;
-
-//
