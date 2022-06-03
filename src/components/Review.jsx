@@ -19,8 +19,9 @@ export default class Review extends Component {
     this.setState({ currentEmail: value });
   }
 
-  handleRatingChange({ target: { value } }) {
-    this.setState({ currentRating: value });
+  handleRatingChange({ target }) {
+    target.style.setProperty('--value', target.value);
+    this.setState({ currentRating: target.value });
   }
 
   handleReviewChange({ target: { value } }) {
@@ -30,6 +31,11 @@ export default class Review extends Component {
   getAvaliations() {
     const avaliations = JSON.parse(localStorage.getItem('avaliations'));
     this.setState({ avaliations });
+  }
+
+  doneRating({ target }) {
+    const avaliations = this.getAvaliations();
+    avaliations.map(({ rating }) => target.style.setProperty('--value', rating));
   }
 
   saveAvaliations() {
@@ -54,7 +60,7 @@ export default class Review extends Component {
   }
 
   render() {
-    const { currentEmail, currentReview, avaliations } = this.state;
+    const { currentEmail, currentReview, avaliations, currentRating } = this.state;
     return (
       <section>
         <h2>
@@ -70,12 +76,15 @@ export default class Review extends Component {
               onChange={ (e) => this.handleEmailChange(e) }
             />
             <input
-              type="radio"
-              value="1"
+              type="range"
+              className="rating"
+              value={ currentRating }
+              step="0.5"
+              max="5"
               data-testid="1-rating"
               onChange={ (e) => this.handleRatingChange(e) }
             />
-            <input
+            {/* <input
               type="radio"
               value="2"
               data-testid="2-rating"
@@ -98,7 +107,7 @@ export default class Review extends Component {
               value="5"
               data-testid="5-rating"
               onChange={ (e) => this.handleRatingChange(e) }
-            />
+            /> */}
           </div>
           <div>
             <textarea
@@ -123,10 +132,11 @@ export default class Review extends Component {
                 {email}
               </h4>
               <input
+                className="savedRating"
                 type="range"
                 step="0.5"
                 max="5"
-                value={ rating }
+                style={ { '--value': rating } }
               />
               <p>
                 {review}
